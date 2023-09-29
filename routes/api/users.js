@@ -10,14 +10,13 @@ router.post(
   [
     check("username", "NOMBRE DE USUARIO ERRONEO").not().isEmpty(),
     check("password", "PASSWORD ERRONEO").not().isEmpty(),
-    check("email", "EMAIL INCORRECTO").isEmail(),
+    check("lp", "DEBES INGRESAR UN LP VALIDO").not().isEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(422).json({ errores: errors.array() });
     }
-
     req.body.password = bcrypt.hashSync(req.body.password, 10);
     const user = await User.create(req.body);
     res.json(user);
@@ -25,7 +24,7 @@ router.post(
 );
 
 router.post("/login", async (req, res) => {
-  const user = await User.findOne({ where: { email: req.body.email } });
+  const user = await User.findOne({ where: { username: req.body.username } });
   if (user) {
     const equal = bcrypt.compareSync(req.body.password, user.password);
     if (equal) {

@@ -2,9 +2,21 @@ const router = require("express").Router();
 
 const { Efect } = require("../../db");
 
+// router.get('/', (req, res)=>{
+//   res.send('FUNCIONA')
+// })
+
 router.get("/", async (req, res) => {
-  console.log(req.userId)
+  // console.log(req.userId)
   const efects = await Efect.findAll();
+  res.json(efects);
+  res.send(efects)
+});
+router.get("/:efectId", async (req, res) => {
+    const efects = await Efect.findOne({
+    where: {id: req.params.efectId}
+  });
+  
   res.json(efects);
 });
 
@@ -14,6 +26,7 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/:efectId", async (req, res) => {
+  console.log("params", req.params)
   await Efect.update(req.body, {
     where: {
       id: req.params.efectId,

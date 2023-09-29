@@ -7,12 +7,12 @@ module.exports = (sequelize, type) => {
       primaryKey: true,
       autoIncrement: true,
     },
-
-    title: { type: DataTypes.STRING, allowNull: false },
-    description: { type: DataTypes.STRING, allowNull: false },
-    observations: { type: DataTypes.STRING, allowNull: false },
-    entry: { type: DataTypes.DATEONLY },
-    exit: { type: DataTypes.DATEONLY },
+    legajo: { type: DataTypes.STRING, allowNull: false },
+    caso: { type: DataTypes.STRING, allowNull: false },
+    descripcion: { type: DataTypes.STRING, allowNull: false },
+    observaciones: { type: DataTypes.STRING, allowNull: false },
+    fecha_entrada: { type: DataTypes.DATEONLY, allowNull:false },
+    fecha_salida: { type: DataTypes.DATEONLY, allowNull:false},
     
   });
 };
